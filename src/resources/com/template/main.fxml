@@ -77,35 +77,35 @@
                   <Glow />
                </effect>
             </Label>
-            <TextField fx:id="txtNotaImdb" layoutX="143.0" layoutY="229.0" prefHeight="25.0" prefWidth="214.0">
+            <TextField fx:id="txtNotaIMDB" layoutX="143.0" layoutY="229.0" prefHeight="25.0" prefWidth="214.0">
                <effect>
                   <DropShadow />
                </effect></TextField>
-            <Button fx:id="btnSalvar" layoutX="393.0" layoutY="129.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="77.0" style="-fx-background-color: green;" text="Salvar" textFill="WHITE" underline="true">
+            <Button fx:id="btnSalvar" layoutX="393.0" layoutY="129.0" mnemonicParsing="false" onAction="#btnSalvarAction" prefHeight="36.0" prefWidth="77.0" style="-fx-background-color: green;" text="Salvar" textFill="WHITE" underline="true">
                <effect>
                   <DropShadow />
                </effect></Button>
-            <Button fx:id="btnListar" layoutX="477.0" layoutY="129.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="77.0" style="-fx-background-color: black;" text="Listar" textFill="WHITE" underline="true">
+            <Button fx:id="btnListar" layoutX="477.0" layoutY="129.0" mnemonicParsing="false" onAction="#btnListarAction" prefHeight="36.0" prefWidth="77.0" style="-fx-background-color: black;" text="Listar" textFill="WHITE" underline="true">
                <effect>
                   <DropShadow />
                </effect>
             </Button>
-            <Button fx:id="btnAlterar" layoutX="392.0" layoutY="175.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="77.0" style="-fx-background-color: #FEBE10;" text="Alterar" textFill="WHITE" underline="true">
+            <Button fx:id="btnAlterar" layoutX="392.0" layoutY="175.0" mnemonicParsing="false" onAction="#btnAlterarAction" prefHeight="36.0" prefWidth="77.0" style="-fx-background-color: #FEBE10;" text="Alterar" textFill="WHITE" underline="true">
                <effect>
                   <DropShadow />
                </effect></Button>
-            <Button fx:id="btnDeletar" layoutX="477.0" layoutY="175.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="77.0" style="-fx-background-color: red;" text="Deletar" textFill="WHITE" underline="true">
+            <Button fx:id="btnDeletar" layoutX="477.0" layoutY="175.0" mnemonicParsing="false" onAction="#btnDeletarAction" prefHeight="36.0" prefWidth="77.0" style="-fx-background-color: red;" text="Deletar" textFill="WHITE" underline="true">
                <effect>
                   <DropShadow />
                </effect></Button>
-            <TableView fx:id="tblCinema" layoutX="87.0" layoutY="285.0" prefHeight="151.0" prefWidth="450.0">
+            <TableView fx:id="tblCinema" layoutX="87.0" layoutY="285.0" onMouseClicked="#carregarCampos" prefHeight="151.0" prefWidth="450.0">
               <columns>
                 <TableColumn fx:id="colId" prefWidth="75.0" text="ID" />
                 <TableColumn fx:id="colNome" prefWidth="75.0" text="Nome" />
                   <TableColumn fx:id="colGenero" prefWidth="75.0" text="Gênero" />
                   <TableColumn fx:id="colAnoLancamento" prefWidth="75.0" text="Ano" />
                   <TableColumn fx:id="colBilheteria" prefWidth="75.0" text="Bilheteria" />
-                  <TableColumn fx:id="colNotaImdb" prefWidth="75.0" text="Nota" />
+                  <TableColumn fx:id="colNotaIMDB" prefWidth="75.0" text="Nota" />
               </columns>
                <effect>
                   <DropShadow />

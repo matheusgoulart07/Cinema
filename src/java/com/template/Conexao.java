@@ -1,5 +1,9 @@
 package com.template;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 public class Conexao {
 
     static String conexao = "jdbc:postgresql://localhost:5432/cinema";

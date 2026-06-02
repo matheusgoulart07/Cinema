@@ -1,5 +1,12 @@
 package com.template;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+
 public class CinemaDAO {
 
     public void cadastrarFilme(CinemaDTO cinema) {
@@ -24,33 +31,39 @@ public class CinemaDAO {
             e.printStackTrace(); // Exibe detalhes do erro
         }
     }
+        public ArrayList<CinemaDTO> listarFilme() {
+            // 1. Cria a lista que vai guardar os filmes
+            ArrayList<CinemaDTO> lista = new ArrayList<>();
 
-    public void listarFilme(){
-        DecimalFormat df = new DecimalFormat("#,##0.00"); /* Formata a
-        bilheteria sem notação científica */
-        String sql = "SELECT * FROM cinema ORDER BY id";
-        try (Connection c = new Conexao().conectaBD();
-             PreparedStatement ps = c.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery();) { /* Utilizado em comandos
-                SELECT, executa a consulta SQL e armazena os resultados
-                retornados pelo banco */
+            String sql = "SELECT * FROM cinema ORDER BY id";
 
-            while(rs.next())
-            {
-                System.out.println(
-                        rs.getInt("id") + " | " +
-                                rs.getString("nome") + " | " +
-                                rs.getString("genero") + " | " +
-                                rs.getInt("ano_lancamento") + " | " +
-                                df.format(rs.getDouble("bilheteria")) + " | " +
-                                rs.getDouble("nota_imdb")
-                );
+            try (Connection c = new Conexao().conectaBD();
+                 PreparedStatement ps = c.prepareStatement(sql);
+                 ResultSet rs = ps.executeQuery()) {
+
+                while (rs.next()) {
+                    // 2. Cria um DTO novo para cada linha que o banco de dados achar
+                    CinemaDTO cinema = new CinemaDTO();
+
+                    // 3. Pega os dados do banco e joga dentro do DTO usando os SETTERS
+                    cinema.setId(rs.getInt("id"));
+                    cinema.setNome(rs.getString("nome"));
+                    cinema.setGenero(rs.getString("genero"));
+                    cinema.setAnoLancamento(rs.getInt("ano_lancamento"));
+                    cinema.setBilheteria(rs.getDouble("bilheteria"));
+                    cinema.setNotaIMDB(rs.getDouble("nota_imdb"));
+
+                    // 4. Adiciona esse filme preenchido na lista
+                    lista.add(cinema);
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
 
-        } catch (SQLException e) {
-            e.printStackTrace();
+            // 5. RETORNA A LISTA CHEIA (Em vez de retornar null!)
+            return lista;
         }
-    }
 
     public void alterarFilme(CinemaDTO cinema){
         String sql = "UPDATE cinema SET nome = ?, genero = ?,"
@@ -94,3 +107,4 @@ public class CinemaDAO {
     }
 
 }
+
