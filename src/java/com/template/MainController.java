@@ -75,15 +75,18 @@ public class MainController {
     }
 
     @FXML
-    private void btnListarAction() {
-        carregarFilmes();
+    private void btnLimparAction() {
+        txtNome.clear();
+        txtGenero.clear();
+        txtAnoLancamento.clear();
+        txtBilheteria.clear();
+        txtNotaIMDB.clear();
     }
 
     @FXML
     private void btnAlterarAction(ActionEvent event) {
         CinemaDTO filmeSelecionado = tblCinema.getSelectionModel().getSelectedItem();
 
-        if (filmeSelecionado != null) {
             CinemaDTO objCinemaDTO = new CinemaDTO();
             objCinemaDTO.setId(filmeSelecionado.getId());
             objCinemaDTO.setNome(txtNome.getText());
@@ -96,20 +99,17 @@ public class MainController {
             objCinemaDAO.alterarFilme(objCinemaDTO);
 
             carregarFilmes();
-        }
     }
 
         @FXML
         private void btnDeletarAction (ActionEvent event){
             CinemaDTO filmeSelecionado = tblCinema.getSelectionModel().getSelectedItem();
 
-            if (filmeSelecionado != null) {
                 CinemaDAO objCinemaDAO = new CinemaDAO();
 
                 objCinemaDAO.deletarFilme(filmeSelecionado.getId());
 
                 carregarFilmes();
-            }
         }
 
     @FXML
@@ -128,13 +128,11 @@ public class MainController {
     private void carregarCampos() {
         CinemaDTO objCinemaDTO = tblCinema.getSelectionModel().getSelectedItem();
 
-        if (objCinemaDTO != null) {
             txtNome.setText(objCinemaDTO.getNome());
             txtGenero.setText(objCinemaDTO.getGenero());
             txtAnoLancamento.setText(String.valueOf( objCinemaDTO.getAnoLancamento()));
             txtBilheteria.setText(String.valueOf( objCinemaDTO.getBilheteria()));
             txtNotaIMDB.setText(String.valueOf( objCinemaDTO.getNotaIMDB()));
-        }
     }
 
     }

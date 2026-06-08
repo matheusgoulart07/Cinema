@@ -4,10 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 public class CinemaDAO {
+
+    private static final Logger logger = Logger.getLogger(CinemaDAO.class.getName());
 
     public void cadastrarFilme(CinemaDTO cinema) {
         String sql = "INSERT INTO cinema "
@@ -28,7 +31,7 @@ public class CinemaDAO {
                 INSERT, UPDATE ou DELETE no banco de dados */
 
         } catch (SQLException e) {
-            e.printStackTrace(); // Exibe detalhes do erro
+            logger.log(Level.SEVERE, "Erro ao cadastrar filme"); // Exibe detalhes do erro
         }
     }
         public ArrayList<CinemaDTO> listarFilme() {
@@ -58,7 +61,7 @@ public class CinemaDAO {
                 }
 
             } catch (SQLException e) {
-                e.printStackTrace();
+                logger.log(Level.SEVERE, "Erro ao listar filme");
             }
 
             // 5. RETORNA A LISTA CHEIA (Em vez de retornar null!)
@@ -83,7 +86,7 @@ public class CinemaDAO {
             System.out.println("Filme alterado!");
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Erro ao alterar filme");
         }
     }
 
@@ -102,7 +105,7 @@ public class CinemaDAO {
             }
 
         } catch (SQLException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Erro ao deletar filme");
         }
     }
 

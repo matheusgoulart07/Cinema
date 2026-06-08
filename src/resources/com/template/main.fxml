@@ -85,7 +85,7 @@
                <effect>
                   <DropShadow />
                </effect></Button>
-            <Button fx:id="btnListar" layoutX="477.0" layoutY="129.0" mnemonicParsing="false" onAction="#btnListarAction" prefHeight="36.0" prefWidth="77.0" style="-fx-background-color: black;" text="Listar" textFill="WHITE" underline="true">
+            <Button fx:id="btnLimpar" layoutX="477.0" layoutY="129.0" mnemonicParsing="false" onAction="#btnLimparAction" prefHeight="36.0" prefWidth="77.0" style="-fx-background-color: black;" text="Limpar" textFill="WHITE" underline="true">
                <effect>
                   <DropShadow />
                </effect>
