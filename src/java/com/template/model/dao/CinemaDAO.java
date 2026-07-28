@@ -1,4 +1,7 @@
-package com.template;
+package com.template.model.dao;
+
+import com.template.model.dto.CinemaDTO;
+import com.template.model.dto.Conexao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
