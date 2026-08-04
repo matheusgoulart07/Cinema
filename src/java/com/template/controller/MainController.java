@@ -1,5 +1,7 @@
 package com.template.controller;
 
+import static com.template.validacao.FilmeValidador.*;
+import static com.template.util.DialogUtil.*;
 import com.template.model.dao.CinemaDAO;
 import com.template.model.dto.CinemaDTO;
 import javafx.scene.control.Label;
@@ -70,59 +72,14 @@ public class MainController {
 
         carregarFilmes();
 
-        // Botão Salvar e Alterar ficam desativados enquanto todos os campos não estiverem preenchidos.
-        btnSalvar.disableProperty().bind(
-                Bindings.createBooleanBinding(() ->
-                                txtNome.getText().trim().isEmpty() ||
-                                        txtGenero.getText().trim().isEmpty() ||
-                                        txtAnoLancamento.getText().trim().isEmpty() ||
-                                        txtBilheteria.getText().trim().isEmpty() ||
-                                        txtNotaIMDB.getText().trim().isEmpty(),
 
-                        txtNome.textProperty(),
-                        txtGenero.textProperty(),
-                        txtAnoLancamento.textProperty(),
-                        txtBilheteria.textProperty(),
-                        txtNotaIMDB.textProperty()
-                )
-        );
 
-        btnAlterar.disableProperty().bind(
-                Bindings.createBooleanBinding(() ->
-                                txtNome.getText().trim().isEmpty() ||
-                                        txtGenero.getText().trim().isEmpty() ||
-                                        txtAnoLancamento.getText().trim().isEmpty() ||
-                                        txtBilheteria.getText().trim().isEmpty() ||
-                                        txtNotaIMDB.getText().trim().isEmpty(),
-
-                        txtNome.textProperty(),
-                        txtGenero.textProperty(),
-                        txtAnoLancamento.textProperty(),
-                        txtBilheteria.textProperty(),
-                        txtNotaIMDB.textProperty()
-                )
-        );
-
-        // Botão Limpar ativa quando pelo menos um campo é preenchido
-        btnLimpar.disableProperty().bind(
-                Bindings.createBooleanBinding(() ->
-                                txtNome.getText().trim().isEmpty() &&
-                                        txtGenero.getText().trim().isEmpty() &&
-                                        txtAnoLancamento.getText().trim().isEmpty() &&
-                                        txtBilheteria.getText().trim().isEmpty() &&
-                                        txtNotaIMDB.getText().trim().isEmpty(),
-
-                        txtNome.textProperty(),
-                        txtGenero.textProperty(),
-                        txtAnoLancamento.textProperty(),
-                        txtBilheteria.textProperty(),
-                        txtNotaIMDB.textProperty()
-                )
-        );
     }
 
     @FXML
     private void btnSalvarAction(ActionEvent event) {
+
+        if(validarSalvar(txtNome.getText(), txtGenero.getText(), txtAnoLancamento.getText(), txtBilheteria.getText(), txtNotaIMDB.getText())) {
 
         CinemaDAO cinemaDAO = new CinemaDAO();
 
@@ -147,27 +104,36 @@ public class MainController {
 
             lblMensagem.setText("Filme salvo com sucesso!");
             lblMensagem.setStyle("-fx-text-fill: green;");
+            showInfo("Filme salvo com sucesso!");
 
         } catch (Exception e) {
             lblMensagem.setText("Erro ao salvar o filme.");
             lblMensagem.setStyle("-fx-text-fill: red;");
+            showError("Erro ao salvar o filme");
+            }
         }
     }
 
     @FXML
     private void btnLimparAction() {
-        txtNome.clear();
-        txtGenero.clear();
-        txtAnoLancamento.clear();
-        txtBilheteria.clear();
-        txtNotaIMDB.clear();
 
-        // Limpa a mensagem da tela quando o usuário limpa os campos
-        lblMensagem.setText("");
+        if(validarLimpar(txtNome.getText(), txtGenero.getText(), txtAnoLancamento.getText(), txtBilheteria.getText(), txtNotaIMDB.getText())) {
+
+            txtNome.clear();
+            txtGenero.clear();
+            txtAnoLancamento.clear();
+            txtBilheteria.clear();
+            txtNotaIMDB.clear();
+
+            // Limpa a mensagem da tela quando o usuário limpa os campos
+            lblMensagem.setText("");
+        }
     }
 
     @FXML
     private void btnAlterarAction(ActionEvent event) {
+
+        if(validarAlterar(txtNome.getText(), txtGenero.getText(), txtAnoLancamento.getText(), txtBilheteria.getText(), txtNotaIMDB.getText())) {
 
         CinemaDAO cinemaDAO = new CinemaDAO();
 
@@ -177,6 +143,7 @@ public class MainController {
             if (filmeSelecionado == null) {
                 lblMensagem.setText("Selecione um filme na tabela para alterar.");
                 lblMensagem.setStyle("-fx-text-fill: orange;");
+                showInfo("Selecione um filme na tabela para alterar.");
                 return;
             }
 
@@ -195,9 +162,11 @@ public class MainController {
 
             lblMensagem.setText("Filme alterado com sucesso!");
             lblMensagem.setStyle("-fx-text-fill: green;");
+            showInfo("Filme alterado com sucesso");
         } catch (Exception e) {
             lblMensagem.setText("Erro ao alterar o filme.");
             lblMensagem.setStyle("-fx-text-fill: red;");
+            showError("Erro ao alterar o filme.");
         }
     }
 
@@ -211,6 +180,7 @@ public class MainController {
         if (filmeSelecionado == null) {
             lblMensagem.setText("Selecione um filme na tabela para excluir.");
             lblMensagem.setStyle("-fx-text-fill: orange;");
+            showInfo("Selecione um filme na tabela para excluir.");
             return;
         }
 
@@ -221,6 +191,7 @@ public class MainController {
 
         lblMensagem.setText("Filme excluído com sucesso!");
         lblMensagem.setStyle("-fx-text-fill: red;");
+        showError("Filme excluido com sucesso");
     }
 
     @FXML

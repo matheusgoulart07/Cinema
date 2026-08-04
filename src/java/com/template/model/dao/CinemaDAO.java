@@ -1,5 +1,7 @@
 package com.template.model.dao;
 
+import static com.template.util.DialogUtil.*;
+
 import com.template.model.dto.CinemaDTO;
 import com.template.model.dto.Conexao;
 
@@ -35,6 +37,7 @@ public class CinemaDAO {
 
         } catch (SQLException e) {
             logger.log(Level.SEVERE, "Erro ao cadastrar filme"); // Exibe detalhes do erro
+            showError("Erro ao cadastrar o filme");
         }
     }
         public ArrayList<CinemaDTO> listarFilme() {
@@ -65,6 +68,7 @@ public class CinemaDAO {
 
             } catch (SQLException e) {
                 logger.log(Level.SEVERE, "Erro ao listar filme");
+                showError("Erro ao listar o filme");
             }
 
             // 5. RETORNA A LISTA CHEIA (Em vez de retornar null!)
@@ -90,6 +94,7 @@ public class CinemaDAO {
 
         } catch (SQLException e) {
             logger.log(Level.SEVERE, "Erro ao alterar filme");
+            showError("Erro ao alterar o filme");
         }
     }
 
@@ -109,6 +114,7 @@ public class CinemaDAO {
 
         } catch (SQLException e) {
             logger.log(Level.SEVERE, "Erro ao deletar filme");
+            showError("Erro ao deletar o filme");
         }
     }
 
