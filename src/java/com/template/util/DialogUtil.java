@@ -1,10 +1,11 @@
 package com.template.util;
+
 import javafx.scene.control.Alert;
 
 public class DialogUtil {
 
     public static void showError(String mensagem) {
-        Alert alert = new Alert (Alert.AlertType.ERROR);
+        Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Erro");
         alert.setHeaderText(null);
         alert.setContentText(mensagem);
@@ -26,5 +27,4 @@ public class DialogUtil {
         alert.setContentText(mensagem);
         alert.showAndWait();
     }
-
 }

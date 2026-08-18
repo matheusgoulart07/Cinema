@@ -1,77 +1,94 @@
 package com.template.validacao;
 
 import static com.template.util.DialogUtil.*;
-import javafx.beans.binding.Bindings;
 
 public class FilmeValidador {
 
-    public static boolean validarSalvar(String nome, String genero, String anoLancamento, String bilheteria, String notaIMDB) {
+    public static boolean validarFormulario(String nome, String genero, String anoLancamento, String bilheteria, String notaIMDB) {
 
-        if (nome.isEmpty() || genero.isEmpty() || anoLancamento.isEmpty() || bilheteria.isEmpty() || notaIMDB.isEmpty())
-            showWarning("Preencha o(s) campo(s) faltante(s)");
+
+        if (nome.isEmpty() || genero.isEmpty() || anoLancamento.isEmpty() || bilheteria.isEmpty() || notaIMDB.isEmpty()) {
+            showWarning("Preencha todos os campos");
+        return false;
+    }
+        if (!validarNome(nome)) {
+            showWarning("Digite um nome valido!");
             return false;
+        }
+
+        if (!validarGenero(genero)) {
+            showWarning("Digite um Genero de Film valido!");
+            return false;
+        }
+
+        if (!validarAnoLancamento(anoLancamento)) {
+            showWarning("Digite um Genero de Film valido!");
+            return false;
+        }
+
+        if (!validarBilheteria(bilheteria)) {
+            showWarning("Digite um Genero de Film valido!");
+            return false;
+        }
+
+        if (!validarNotaIMDB(notaIMDB)) {
+            showWarning("Digite um Genero de Film valido!");
+            return false;
+        }
+
+        return true;
+
     }
 
-    public static boolean validarAlterar(String nome, String genero, String anoLancamento, String bilheteria, String notaIMDB) {
-
-        if (nome.isEmpty() || genero.isEmpty() || anoLancamento.isEmpty() || bilheteria.isEmpty() || notaIMDB.isEmpty())
-            showWarning("Preencha o(s) campo(s) faltante(s)");
-        return false;
+    public static boolean validarNome(String nome) {
+        if (nome.isEmpty()) {
+            showWarning("Digite um nome real");
+            return false;
+        }
+        return true;
     }
 
-    public static boolean validarLimpar(String nome, String genero, String anoLancamento, String bilheteria, String notaIMDB) {
-
-        if (nome.isEmpty() || genero.isEmpty() || anoLancamento.isEmpty() || bilheteria.isEmpty() || notaIMDB.isEmpty())
-            showWarning("Preencha o(s) campo(s) faltante(s)");
-        return false;
+    public static boolean validarGenero(String genero) {
+        if (genero.isEmpty()) {
+            showWarning("Digite um Genero real");
+            return false;
+        }
+        return true;
     }
 
-    /* btnSalvar.disableProperty().bind(
-            Bindings.createBooleanBinding(() ->
-            txtNome.getText().trim().isEmpty() ||
-            txtGenero.getText().trim().isEmpty() ||
-            txtAnoLancamento.getText().trim().isEmpty() ||
-            txtBilheteria.getText().trim().isEmpty() ||
-            txtNotaIMDB.getText().trim().isEmpty(),
+    public static boolean validarAnoLancamento(String anoLancamento) {
+        if (anoLancamento.isEmpty()) {
+            showWarning("Digite um Ano de Lançamento real");
+            return false;
+        }
+        return true;
+    }
 
-                        txtNome.textProperty(),
-                                txtGenero.textProperty(),
-                                txtAnoLancamento.textProperty(),
-                                txtBilheteria.textProperty(),
-                                txtNotaIMDB.textProperty()
-                                )
-                                );
+    public static boolean validarBilheteria(String bilheteria) {
+        if (bilheteria.isEmpty()) {
+            showWarning("Digite uma Bilheteria real");
+            return false;
+        }
+        return true;
+    }
 
-        btnAlterar.disableProperty().bind(
-            Bindings.createBooleanBinding(() ->
-            txtNome.getText().trim().isEmpty() ||
-            txtGenero.getText().trim().isEmpty() ||
-            txtAnoLancamento.getText().trim().isEmpty() ||
-            txtBilheteria.getText().trim().isEmpty() ||
-            txtNotaIMDB.getText().trim().isEmpty(),
+    public static boolean validarNotaIMDB(String notaIMDB) {
+        if (notaIMDB.isEmpty()) {
+            showWarning("Digite uma Nota real do site IMDB");
+            return false;
+        }
+        return true;
+    }
 
-                        txtNome.textProperty(),
-                                txtGenero.textProperty(),
-                                txtAnoLancamento.textProperty(),
-                                txtBilheteria.textProperty(),
-                                txtNotaIMDB.textProperty()
-                                )
-                                );
-
-    // Botão Limpar ativa quando pelo menos um campo é preenchido
-        btnLimpar.disableProperty().bind(
-            Bindings.createBooleanBinding(() ->
-            txtNome.getText().trim().isEmpty() &&
-            txtGenero.getText().trim().isEmpty() &&
-            txtAnoLancamento.getText().trim().isEmpty() &&
-            txtBilheteria.getText().trim().isEmpty() &&
-            txtNotaIMDB.getText().trim().isEmpty(),
-
-                        txtNome.textProperty(),
-                                txtGenero.textProperty(),
-                                txtAnoLancamento.textProperty(),
-                                txtBilheteria.textProperty(),
-                                txtNotaIMDB.textProperty()
-                                )
-                                ); */
 }
+
+/*Verifica se tem algum campo branco/nulo
+        if (nome == null || nome.isBlank() ||
+                genero == null || genero.isBlank() ||
+                anoStr == null || anoStr.isBlank() ||
+                bilheteriaStr == null || bilheteriaStr.isBlank() ||
+                notaStr == null || notaStr.isBlank()) {
+
+            showWarning("Preencha todos os campos obrigatórios.");
+            return false;
+        } */
