@@ -1,7 +1,8 @@
 package com.template.controller;
 
+import com.template.validacao.IFilmeValidacao;
 import javafx.scene.input.MouseEvent;
-import static com.template.validacao.FilmeValidador.*;
+
 import static com.template.util.FormUtil.*;
 import static com.template.util.DialogUtil.*;
 
@@ -18,6 +19,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.event.ActionEvent;
 
 public class MainController {
+
+    private final IFilmeValidacao movieValidador;
+
+    public MainController(IFilmeValidacao movieValidador) {
+        this.movieValidador = movieValidador;
+    }
 
     @FXML private Label lblMensagem;
     @FXML private Button btnSalvar;
@@ -67,7 +74,7 @@ public class MainController {
 
     @FXML
     private void btnSalvarAction(ActionEvent event) {
-        if (!validarFormulario(txtNome.getText(), txtGenero.getText(), txtAnoLancamento.getText(), txtBilheteria.getText(), txtNotaIMDB.getText())) {
+        if (!movieValidador.validarFilme(txtNome.getText(), txtGenero.getText(), txtAnoLancamento.getText(), txtBilheteria.getText(), txtNotaIMDB.getText())) {
             return;
         }
 
@@ -81,14 +88,15 @@ public class MainController {
 
     @FXML
     private void btnAlterarAction(ActionEvent event) {
+
         CinemaDTO filmeSelecionado = tblCinema.getSelectionModel().getSelectedItem();
 
-        if (filmeSelecionado == null) {
-            showWarning("Selecione um filme na tabela para alterar.");
+        if (!movieValidador.validarFilme(txtNome.getText(), txtGenero.getText(), txtAnoLancamento.getText(), txtBilheteria.getText(), txtNotaIMDB.getText())) {
             return;
         }
 
-        if (!validarFormulario(txtNome.getText(), txtGenero.getText(), txtAnoLancamento.getText(), txtBilheteria.getText(), txtNotaIMDB.getText())) {
+        if (filmeSelecionado == null) {
+            showWarning("Selecione um filme na tabela para alterar.");
             return;
         }
 

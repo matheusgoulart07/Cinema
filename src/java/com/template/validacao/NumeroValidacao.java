@@ -1,11 +1,11 @@
 package com.template.validacao;
 import static com.template.util.DialogUtil.*;
 
-public class NumeroValidador implements Validacao<String> {
+public class NumeroValidacao implements Validacao<String> {
 
     private final String anoLancamento;
 
-    public NumeroValidador(String anoLancamento) {
+    public NumeroValidacao(String anoLancamento) {
         this.anoLancamento = anoLancamento;
     }
 
@@ -15,7 +15,6 @@ public class NumeroValidador implements Validacao<String> {
         try {
             int anoLancamento = Integer.parseInt(valor);
         } catch (NumberFormatException e) {
-            showWarning("NAO EH INTEIRO");
             return false;
         }
         return true;
@@ -23,7 +22,7 @@ public class NumeroValidador implements Validacao<String> {
 
     @Override
     public String getMensagemErro() {
-        return "Digite um numero inteiro";
+        return "Digite um numero inteiro que corresponda a algum ano!!!";
     }
 
     @Override
